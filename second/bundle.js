@@ -80,7 +80,7 @@ exports.default = bar;
 function bar() {
     //
     //
-    console.log("ggg");
+    // console.log("ggg");
     alert("hello webpack");
 }
 
