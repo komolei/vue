@@ -4,6 +4,7 @@
 
     git clone git@github.com:komolei/vue.git
 
+    cd second
 <h4>npm install</h4>
 
 <h4>或是</h4>
