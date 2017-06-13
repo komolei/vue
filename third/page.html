@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="newTask">
+            <!--<input type="text" name="text" value="text" v-model="newTodo" v-on:keyup.enter="addTodo">-->
+            <input type="text" name="text" value="text" v-model="newTodo" @keyup.enter="addTodo">
+            <!--@keyup:enter="addTodo"-->
+        </div>
+        <ol class="todos">
+            <!--<li v-for="todo in todoList" v-on:changer="store(todo)">-->
+            <li v-for="todo in todoList">
+                <input type="checkbox" v-model="todo.done"> {{ todo.title }}
+                <span v-if="todo.done">已完成</span>
+                <span v-else>未完成</span>
+                <button v-on:click="remove(todo)">X</button>
+
+            </li>
+        </ol>
+    </div>
+    <!--<div id="example">
+        <button v-on:click="counter+=1">增加1</button>
+        <p>这个按钮点击增加 {{counter}} </p>
+    </div>
+    <div id="example2"><button v-on:click="greet">点我i</button>
+        <p>try </p>
+    </div>
+
+    <div id="example3"><button v-on:click="Say('hi')">Say hi</button>
+        <button v-on:click="Say('what')">Say what</button>
+        <button v-on:click="warn('Form cannot be submitted yet.', $event)">Submit</button>
+        <button v-on:click.once="warn1('messsss')">Submit something</button>
+        <button v-on:keyup.enter="warn2('keyup')">keyup</button>
+    <button @keyup.space="warn2('keyup')">keyup</button>
+
+    </div>
+
+    <ul id="example-1">
+        <li v-for="item in items">
+            {{ item.message }}
+        </li>
+    </ul>
+    <ul id="example-2">
+        <li v-for="(item, index) of items">
+            {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
+    </ul>-->
+    <script src="bundle.js"></script>
+</body>
+
+</html>
