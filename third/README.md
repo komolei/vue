@@ -4,7 +4,7 @@
 
     git clone git@github.com:komolei/vue.git
 
-    cd second
+    cd third
 <h4>npm install</h4>
 
     npm install
@@ -17,3 +17,11 @@
 **注意点**
     在当前文件夹中使用webpack
     输入: ./node_modules/.bin/webpack ==>这样就可以卸载webpack了，卸载方式：npm uninstall webpack
+
+<h5>.gitignore的使用方式</h5>
+    相对大的文件，并不希望上传到github上
+    touch .gitignore
+    vi .gitignore
+    node_modules
+    .DS_Store
+    .idea
