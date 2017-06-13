@@ -2,24 +2,45 @@
 
 <head>
     <meta charset="utf-8">
-
+    <style>
+        html {
+            font-size: 20px;
+        }
+        
+        #app {
+            width: 40rem;
+            height: 1rem;
+            margin: 0 auto;
+            font-size: .8rem;
+        }
+        
+        #app .newTask>input {
+            width: 40rem;
+            border-radius: 4px;
+            outline-color: rebeccapurple;
+        }
+        
+        .todos button {
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
         <div class="newTask">
             <!--<input type="text" name="text" value="text" v-model="newTodo" v-on:keyup.enter="addTodo">-->
-            <input type="text" name="text" value="text" v-model="newTodo" @keyup.enter="addTodo">
+            <input type="text" name="text" value="text" v-model="newTodo" @keyup.enter="addTodo" placeholder="请输入代办事物">
             <!--@keyup:enter="addTodo"-->
         </div>
         <ol class="todos">
-            <!--<li v-for="todo in todoList" v-on:changer="store(todo)">-->
+            <!--<li v-for="todo in todoList" v-on:changer="store(todo)">错误-->
             <li v-for="todo in todoList">
-                <input type="checkbox" v-model="todo.done"> {{ todo.title }}
-                <span v-if="todo.done">已完成</span>
-                <span v-else>未完成</span>
-                <button v-on:click="remove(todo)">X</button>
-
+                <input type="checkbox" v-model="todo.done">
+                <span v-if="todo.done"><del>已完成 {{ todo.title }}</del></span>
+                <span v-else>{{ todo.title }}  未完成</span>
+                <span> {{todo.createdAt}}</span>
+                <button v-on:click="remove(todo)">删除</button>
             </li>
         </ol>
     </div>
