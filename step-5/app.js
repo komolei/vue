@@ -39,38 +39,61 @@ var app = new Vue({
     // },
 
     created: function() {
-        window.onbeforeunload = () => {
-            let dataString = JSON.stringify(this.todoList);
-            window.localStorage.setItem("todo", dataString);
-        }
-        let oldDataString = window.localStorage.getItem("todo");
-        let oldData = JSON.parse(oldDataString);
-        this.todoList = oldData || [];
+        // window.onbeforeunload = () => {
+        //         let dataString = JSON.stringify(this.todoList);
+        //         window.localStorage.setItem("todo", dataString);
+        //         // var AVTodos = AV.Object.extend('AllTodos');
+        //         // var avTodos = new AVTodos();
+        //         // avTodos.set('content', dataString);
+        //         // avTodos.save().then(function(todo) {
+        //         //     // 成功保存之后，执行其他逻辑.
+        //         //     console.log('保存成功');
+        //         // }, function(error) {
+        //         //     // 异常处理
+        //         //     console.error('保存失败', error);
+        //         // });
+
+        //     }
+        // let oldDataString = window.localStorage.getItem("todo");
+        // let oldData = JSON.parse(oldDataString);
+        // this.todoList = oldData || [];
         this.currentUser = this.getCurrentUser();
+
     },
     methods: {
+        saveTodos: function() {
+            let dataString = JSON.stringify(this.todoList)
+            var AVTodos = AV.Object.extend('AllTodos');
+            var avTodos = new AVTodos();
+            avTodos.set('content', dataString);
+            avTodos.save().then(function(todo) {
+                alert('保存成功');
+            }, function(error) {
+                alert('保存失败');
+            });
+        },
         addTodo: function() {
             this.todoList.push({
-                title: this.newTodo,
-                createdAt: new Date(),
-                done: this.done,
+                    title: this.newTodo,
+                    createdAt: new Date(),
+                    done: this.done,
 
-            })
-            console.log(this.todoList);
+                })
+                // let Todo = AV.Object.extend("Todo");
+                // let todo = new Todo();
+            console.log(this.todoList, "todo");
             this.newTodo = "";
+            this.saveTodos()
         },
         remove: function(todo) {
             let index = this.todoList.indexOf(todo);
             this.todoList.splice(index, 1);
+            this.saveTodos()
         },
         signUp: function() {
             let user = new AV.User();
-            // 设置用户名
             user.setUsername(this.formData.username);
-            // 设置密码
             user.setPassword(this.formData.password);
-            // 设置邮箱
-            // user.setEmail('944545149@qq.com');
             user.signUp().then((loginedUser) => {
                 this.currentUser = this.getCurrentUser();
                 console.log(loginedUser);
@@ -108,76 +131,3 @@ var app = new Vue({
         },
     }
 })
-
-
-// if (!window.localStorage) {
-//     localStorage.setItem(app);
-// }
-// var example = new Vue({
-//     el: "#example",
-//     data: {
-//         counter: 0
-//     }
-// })
-
-// var example2 = new Vue({
-//         el: "#example2",
-//         data: {
-//             name: "Vue.js"
-//         },
-//         methods: {
-//             greet: function() {
-//                 alert(this.name);
-//                 // alert(event.target.tagName);
-//             }
-//         }
-//     })
-//     // example2.greet = function() {
-//     //     alert("hello ")
-//     // }
-
-// var example3 = new Vue({
-//     el: "#example3",
-//     data: {
-
-//     },
-//     methods: {
-//         Say: function(message) {
-//             alert(message);
-//         },
-//         warn: function(message, event) {
-//             if (event) event.preventDefault()
-//             alert(message);
-//         },
-//         warn1: function(message) {
-//             // if (event) event.preventDefault()
-//             alert(message);
-//         },
-//         warn2: function(message) {
-//             // if (event) event.preventDefault()
-//             alert(message);
-//         }
-//     }
-// })
-
-// var example1 = new Vue({
-//     el: '#example-1',
-//     data: {
-//         items: [
-//             { message: 'Foo' },
-//             { message: 'Bar' },
-//             { message: 'Bar' }
-//         ]
-//     }
-// })
-
-// var example2 = new Vue({
-//     el: '#example-2',
-//     data: {
-//         parentMessage: 'Parent',
-//         items: [
-//             { message: 'Foo' },
-//             { message: 'Bar' }
-//         ]
-//     }
-// })
