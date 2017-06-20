@@ -24655,18 +24655,74 @@ var app = new _vue2.default({
         // let oldData = JSON.parse(oldDataString);
         // this.todoList = oldData || [];
         this.currentUser = this.getCurrentUser();
+
+        // if (ID.find(this.currentUser)){}
+        this.fetchTodos();
     },
     methods: {
+        fetchTodos: function fetchTodos() {
+            var _this = this;
+
+            if (this.currentUser) {
+                var query = new _leancloudStorage2.default.Query('AllTodos');
+                query.find().then(function (todos) {
+                    var avAllTodos = todos[0];
+                    var id = avAllTodos.id;
+                    _this.todoList = JSON.parse(avAllTodos.attributes.content);
+                    _this.todoList.id = id;
+                }, function (error) {
+                    // 异常处理
+                    console.log("error:", error);
+                });
+            } else {
+                // this.saveTodos();
+            }
+        },
+        updateTodos: function updateTodos() {
+            var dataString = JSON.stringify(this.todoList);
+            var avTodos = _leancloudStorage2.default.Object.createWithoutData('AllTodos', this.todoList.id);
+            avTodos.set('content', dataString);
+            avTodos.save().then(function () {
+                console.log('更新成功');
+            });
+        },
         saveTodos: function saveTodos() {
+            var _this2 = this;
+
             var dataString = JSON.stringify(this.todoList);
             var AVTodos = _leancloudStorage2.default.Object.extend('AllTodos');
             var avTodos = new AVTodos();
+            var acl = new _leancloudStorage2.default.ACL();
+            // acl.setPublicReadAccess(true);
+            // acl.setPublicWriteAccess(false);
+            acl.setWriteAccess(_leancloudStorage2.default.User.current(), true);
+            acl.setReadAccess(_leancloudStorage2.default.User.current(), true);
+            // var administartorRole = new AV.Role('Administrator', acl)
+            avTodos.setACL(acl);
+            // avTodos.save().then(function() {}).catch(function(error) {
+            //     console.log(error);
+            // })
             avTodos.set('content', dataString);
+            // avTodos.save().then(function(todo) {
             avTodos.save().then(function (todo) {
-                alert('保存成功');
+                _this2.todoList.id = todo.id;
+                alert("保持成功"
+
+                // alert('保存成功');
+                // var objectId = avTodos.id;
+                // console.log(objectId);
+                // return objectId;
+                );
             }, function (error) {
                 alert('保存失败');
             });
+        },
+        saveOrUpdateTodos: function saveOrUpdateTodos() {
+            if (this.todoList.id) {
+                this.updateTodos();
+            } else {
+                this.saveTodos();
+            }
         },
         addTodo: function addTodo() {
             this.todoList.push({
@@ -24679,35 +24735,39 @@ var app = new _vue2.default({
             // let todo = new Todo();
             );console.log(this.todoList, "todo");
             this.newTodo = "";
-            this.saveTodos();
+            // this.saveTodos()
+            this.saveOrUpdateTodos();
         },
         remove: function remove(todo) {
             var index = this.todoList.indexOf(todo);
             this.todoList.splice(index, 1);
-            this.saveTodos();
+            // this.saveTodos()
+            this.saveOrUpdateTodos();
         },
         signUp: function signUp() {
-            var _this = this;
+            var _this3 = this;
 
             var user = new _leancloudStorage2.default.User();
             user.setUsername(this.formData.username);
             user.setPassword(this.formData.password);
             user.signUp().then(function (loginedUser) {
-                _this.currentUser = _this.getCurrentUser();
+                _this3.currentUser = _this3.getCurrentUser();
                 console.log(loginedUser);
+                // this.ad();
             }, function (error) {
                 alert("注册失败");
             });
         },
         logIn: function logIn() {
-            var _this2 = this;
+            var _this4 = this;
 
             var username = this.formData.username;
             var password = this.formData.password;
             _leancloudStorage2.default.User.logIn(username, password).then(function (loginedUser) {
                 // console.log(loginedUser, "success");
-                _this2.currentUser = _this2.getCurrentUser();
+                _this4.currentUser = _this4.getCurrentUser();
                 // this.isUser = true;
+                _this4.fetchTodos();
             }, function (error) {
                 alert("登录失败");
             });
@@ -24731,6 +24791,35 @@ var app = new _vue2.default({
             // this.currentUser = null;
             // this.actionType = "logIn";
             window.location.reload();
+        },
+        // ad: function() {
+        //     var roleAcl = new AV.ACL();
+        //     roleAcl.setPublicReadAccess(true);
+        //     roleAcl.setPublicWriteAccess(false);
+
+        //     // 当前用户是该角色的创建者，因此具备对该角色的写权限
+        //     roleAcl.setWriteAccess(AV.User.current(), true);
+
+        //     //新建角色
+        //     var administratorRole = new AV.Role('Administrator', roleAcl);
+        //     administratorRole.save().then(function(role) {
+        //         // 创建成功
+        //     }).catch(function(error) {
+        //         console.log(error);
+        //     });
+        // }
+        User: function User() {
+            var query = new _leancloudStorage2.default.Query('Todo');
+            query.find().then(function (todos) {
+                todos.forEach(function (todo) {
+                    todo.set('status', 1);
+                });
+                return _leancloudStorage2.default.Object.saveAll(todos);
+            }).then(function (todos) {
+                // 更新成功
+            }, function (error) {
+                // 异常处理
+            });
         }
     }
 });

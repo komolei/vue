@@ -4,24 +4,108 @@
     <meta charset="utf-8">
     <style>
         html {
-            font-size: 20px;
+            font-size: 25px;
+        }
+        
+        body {
+            background: linear-gradient(to left, #EEEEFF 0%, #eefeee 80%);
+            margin: 0 auto;
         }
         
         #app {
             width: 40rem;
-            height: 1rem;
+            height: 10rem;
             margin: 0 auto;
             font-size: .8rem;
+            text-align: center;
+        }
+        
+        .tab {
+            padding-top: 2rem;
+            height: 3rem;
+        }
+        
+        .tab>label {
+            width: 2rem;
+            height: 3rem;
+            font-size: 1rem;
+        }
+        
+        .signUp label,
+        .login label {
+            display: inline-block;
+            width: 5rem;
+            height: 3rem;
+            padding-top: 1rem;
+            font-size: 1rem;
+            line-height: 3rem;
+        }
+        
+        .signUp input,
+        .login input {
+            width: 10rem;
+            height: 3rem;
+            border-radius: 1rem;
+            outline: none;
+            box-shadow: none;
+            font-size: 1rem;
+        }
+        
+        #app .lastInput {
+            padding-top: 1rem;
+            width: 5rem;
+            height: 2rem;
+            line-height: 2rem;
+            font-size: .8rem;
+            padding-top: 0;
+            margin-top: 1rem;
+            text-shadow: none;
+        }
+        /*@keyframes show {
+            form {
+                background: #eefeee;
+            }
+            to {
+                background: #EEe;
+            }
+        }
+        
+        #app .show>span {
+            display: inline-block;
+            width: 2rem;
+            height: 3rem;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            background: red;
+            animation: show 3s infinite;
+        }*/
+        
+        .todos button {
+            float: right;
+        }
+        
+        .todos>li>button:first-of-type {
+            padding-right: .2rem;
+            margin-left: .4rem;
+        }
+        
+        #app .newTask {
+            height: 4rem;
+            font-size: 2rem;
+            padding-top: 2rem;
         }
         
         #app .newTask>input {
             width: 40rem;
+            height: 2.2rem;
+            font-size: 1.6rem;
             border-radius: 4px;
             outline-color: rebeccapurple;
         }
         
-        .todos button {
-            float: right;
+        #app .todos>li {
+            padding-top: .6rem;
         }
     </style>
 </head>
@@ -31,31 +115,31 @@
     <div id="app">
         <!--<section id="signInAndSignUp" v-if="isUser='false'">-->
         <section id="signInAndSignUp" v-if="!currentUser">
-            <div>
+            <div class="tab">
                 <label for="signUp"><input type="radio" id="signUp" value="signUp" v-model="actionType">注册</label>
                 <label for="login"><input type="radio" id="login" value="logIn" v-model="actionType"> 登入</label>
                 <!--<div>{{picked}}</div>-->
             </div>
             <div class="signUp" v-if="actionType=='signUp'">
                 <form @submit.prevent=signUp>
-                    <label for="username">用户名</label>
-                    <input type="text" v-model="formData.username">
+                    <label for="username">账号</label>
+                    <input type="text" v-model="formData.username" placeholder="账号">
                     <br>
                     <label for="password">密码</label>
-                    <input type="password" v-model="formData.password">
+                    <input type="password" v-model="formData.password" placeholder="密码">
                     <br>
-                    <input type="submit" value="注册">
+                    <input class="lastInput" type="submit" value="注册">
                 </form>
             </div>
             <div class="login" v-if="actionType=='logIn'">
                 <form v-on:submit.prevent=logIn>
-                    <label for="username">用户名</label>
-                    <input type="text" v-model="formData.username">
+                    <label for="username">账号</label>
+                    <input type="text" v-model="formData.username" placeholder="账号">
                     <br>
                     <label for="password">密码</label>
-                    <input type="password" v-model="formData.password">
+                    <input type="password" v-model="formData.password" placeholder="密码">
                     <br>
-                    <input type="submit" value="登入">
+                    <input class="lastInput" type="submit" value="登入">
                 </form>
             </div>
         </section>
@@ -69,15 +153,27 @@
                 <li v-for="todo in todoList">
                     <input type="checkbox" v-model="todo.done">
                     <button v-on:click="logOut">登出</button>
-                    <span v-if="todo.done"><del>已完成 {{ todo.title }}</del></span>
+                    <span v-if="todo.done"><del style="color: red">已完成 {{ todo.title }}</del></span>
                     <span v-else>{{ todo.title }}  未完成</span>
                     <span> {{todo.createdAt}}</span>
                     <button v-on:click="remove(todo)">删除</button>
                 </li>
             </ol>
         </section>
+        <div class="show">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
     <script src="bundle.js"></script>
+    <script id="__bs_script__">
+        //<![CDATA[
+        document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.12'><\/script>".replace("HOST", location.hostname));
+        //]]>
+    </script>
 </body>
 
 </html>
