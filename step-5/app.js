@@ -106,7 +106,8 @@ var app = new Vue({
             // avTodos.save().then(function(todo) {
             avTodos.save().then((todo) => {
                     this.todoList.id = todo.id;
-                    alert("保持成功")
+                    // alert("保持成功")
+                    console.log('保存成功');
 
                     // alert('保存成功');
                     // var objectId = avTodos.id;
@@ -156,6 +157,7 @@ var app = new Vue({
                 // this.ad();
             }, (error) => {
                 alert("注册失败")
+                console.log(error);
             })
 
         },
@@ -169,6 +171,8 @@ var app = new Vue({
                 this.fetchTodos();
             }, function(error) {
                 alert("登录失败")
+                console.log(error);
+
             });
         },
         getCurrentUser: function() {

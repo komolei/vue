@@ -24706,13 +24706,13 @@ var app = new _vue2.default({
             // avTodos.save().then(function(todo) {
             avTodos.save().then(function (todo) {
                 _this2.todoList.id = todo.id;
-                alert("保持成功"
+                // alert("保持成功")
+                console.log('保存成功');
 
                 // alert('保存成功');
                 // var objectId = avTodos.id;
                 // console.log(objectId);
                 // return objectId;
-                );
             }, function (error) {
                 alert('保存失败');
             });
@@ -24756,6 +24756,7 @@ var app = new _vue2.default({
                 // this.ad();
             }, function (error) {
                 alert("注册失败");
+                console.log(error);
             });
         },
         logIn: function logIn() {
@@ -24770,6 +24771,7 @@ var app = new _vue2.default({
                 _this4.fetchTodos();
             }, function (error) {
                 alert("登录失败");
+                console.log(error);
             });
         },
         getCurrentUser: function getCurrentUser() {
