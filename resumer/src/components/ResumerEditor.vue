@@ -58,8 +58,8 @@ export default {
                     { company: 'TX', content: '我的第一份工作是' },
                 ],
                 education: [
-                    { school: 'AL', content: '文字' },
-                    { school: 'TX', content: '文字' },
+                    { school: '浙江万里学院', content: '文字' },
+                    // { school: '', content: '文字' },
                 ],
                 projects: [
                     { name: 'project A', content: '文字' },
@@ -70,8 +70,8 @@ export default {
                     { name: 'awards B', content: '文字' },
                 ],
                 contacts: [
-                    { contact: 'phone', content: '13812345678' },
-                    { contact: 'qq', content: '12345678' },
+                    { contact: 'Phone', content: '15057474067' },
+                    { contact: 'QQ', content: '944545149' },
                 ],
                 // others: []
             }
