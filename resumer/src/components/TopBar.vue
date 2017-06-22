@@ -3,6 +3,12 @@
         <!--<p>{{text}}</p>-->
         <div class="wrapper">
             <span class="logo">Resumer</span>
+            <div class="actions">
+                <!--<div class="button btnSure"></div>-->
+                <!--<div class="button btnCancel"></div>-->
+                <button class="primary"> 保存</button>
+                <button>预览</button>
+            </div>
         </div>
     </div>
 </template>
@@ -17,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #topBar {
     // font-family: 'Avenir', Helvetica, Arial, sans-serif;
     // -webkit-font-smoothing: antialiased;
@@ -34,11 +40,30 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding:0 16px;
+        padding: 0 16px; // .button {
+        //     width:
+        // }
     }
     .logo {
         font-size: 24px;
         color: #000000;
+    }
+}
+
+button {
+    width: 72px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    background: #ddd;
+    color: #222;
+    &:hover {
+        box-shadow: 1px 1px 1px hsla(0, 0, 0, 0.50);
+    }
+    &.primary {
+        background: #02af5f;
+        color: #ffffff;
     }
 }
 
