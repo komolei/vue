@@ -1,12 +1,12 @@
 <template>
   <!--<div id="app">
-                                          <img src="./assets/logo.png">
-                                            <router-view></router-view>
-                                          <TopBar/>
-                                          <ResumerEditor/>
-                                          <ResumerPreview/>
-                                          <p>{{ text}} </p>
-                                        </div>-->
+                                            <img src="./assets/logo.png">
+                                              <router-view></router-view>
+                                            <TopBar/>
+                                            <ResumerEditor/>
+                                            <ResumerPreview/>
+                                            <p>{{ text}} </p>
+                                          </div>-->
   <div class="page">
     <header>
       <TopBar/>

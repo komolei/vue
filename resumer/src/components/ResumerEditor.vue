@@ -4,13 +4,7 @@
         <nav>
             <ol>
                 <!--<li class="active"> x</li>
-                                                        <li>x</li>
-                                                        <li>x</li>
-                                                        <li>x</li>
-                                                        <li>x</li>
-                                                        <li>x</li>
-                                                        <li>x</li>-->
-                <!--<li v-for="(item,index) in resume.visibleItems" :class="{active:item===selected}" @click="selected=item">{{index}}</li>-->
+                               <li v-for="(item,index) in resume.visibleItems" :class="{active:item===selected}" @click="selected=item">{{index}}</li>-->
                 <li v-for="(item,index) in resume.config" :class="{active:item.field===selected}" @click="selected=item.field">
                     <svg class="icon">
                         <use :xlink:href="`#icon-${item.icon}`"></use>
@@ -19,29 +13,26 @@
             </ol>
         </nav>
         <ol class="panels">
-            <!--<li>1</li>
-                                                < li>2</li>
-                                                <li>3</li>
-                                                <li>4</li>
-                                                <li>5</li>
-                                                <li>6</li>
-                                                <li>7</li>-->
-            <!--<li v-for="item in resume.visibleItems" v-show="item===selected">{{resume[item]}}</li>-->
-            <li v-for="item in resume.config" v-show="item.field===selected">{{resume[item.field]}}</li>
+            <li v-for="item in resume.config" v-show="item.field===selected">
+                <!--<div class="resumeField" v-for="(value , key) in resume[item.field]">-->
+                <div v-if="resume[item.field] instanceof Array">
+                    <div class="subitem" v-for="subitem in resume[item.field]">
+                        <div class="resumeField" v-for="(value,key) in subitem">
+                            <label> {{ key }}</label>
+                            <input type="text" :value="value">
+                        </div>
+                    </div>
+    
+                </div>
+                <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
+                    <label> {{ key }}</label>
+                    <input type="text" v-model="resume[item.field][key]">
+                </div>
+            </li>
         </ol>
     </div>
 </template>
 <script>
-
-// export default {
-
-//     name: "ResumerEditor",
-//     data: function () {
-//         return {
-//             text: "xixi RESUMEREDITOR"
-//         }
-//     }
-// }
 export default {
     name: "ResumerEditor",
     data() {
@@ -51,29 +42,44 @@ export default {
                 // visibleItems: ['profile', 'work history', 'education', 'projects', 'awards', 'contacts', 'others'],
                 config: [
                     { field: 'profile', icon: 'id' },
-                    { field: 'work history', icon: 'work' },
+                    { field: 'work', icon: 'work' },
                     { field: 'education', icon: 'book' },
                     { field: 'projects', icon: 'heart' },
                     { field: 'awards', icon: 'cup' },
                     { field: 'contacts', icon: 'phone' },
                 ],
                 profile: {
-                    name: '',
-                    city: '',
-                    title: ''
+                    name: 'komolei',
+                    city: 'ningbo',
+                    title: 'komolei say hi',
                 },
-                'work history': [],
-                education: [],
-                projects: [],
-                awards: [],
-                contacts: [],
+                work: [
+                    { company: 'AL', content: '我的第二份工作是' },
+                    { company: 'TX', content: '我的第一份工作是' },
+                ],
+                education: [
+                    { school: 'AL', content: '文字' },
+                    { school: 'TX', content: '文字' },
+                ],
+                projects: [
+                    { name: 'project A', content: '文字' },
+                    { name: 'project B', content: '文字' },
+                ],
+                awards: [
+                    { name: 'awards A', content: '文字' },
+                    { name: 'awards B', content: '文字' },
+                ],
+                contacts: [
+                    { contact: 'phone', content: '13812345678' },
+                    { contact: 'qq', content: '12345678' },
+                ],
                 // others: []
             }
         }
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #ResumerEditor {
     // font-family: 'Avenir', Helvetica, Arial, sans-serif;
     // -webkit-font-smoothing: antialiased;
@@ -84,9 +90,16 @@ export default {
     display: flex;
     flex-direction: row;
     overflow: auto;
+    >.panels {
+        flex-grow: 1;
+        >li {
+            padding: 24px;
+        }
+    }
+
     >nav {
         width: 80px;
-        background: black;
+        background: #1f2126;
         color: #fff;
         >ol {
             >li {
@@ -112,6 +125,26 @@ svg.icon {
 
 ol {
     list-style: none;
+}
+
+.resumeField {
+    >label {
+        display: block;
+    }
+    input[type=text] {
+        margin: 16px 0;
+        border: 1px solid #ddd;
+        box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+        width: 100%;
+        height: 40px;
+        padding: 0 8px;
+    }
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 24px 0;
 }
 
 // #ResumerEditor P {
