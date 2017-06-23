@@ -5,9 +5,13 @@
 
 <body>
     <div id="komo">
-        {{ message }}
+        <p>{{ message }}</p>
+        <p v-if="show===true" @click="sayName">hello {{name}} </p>
+        <input type="text" v-model="name">
+        <p v-if="show===false">GoodByb {{name}} </p>
+        <p>{{todo}}</p>
+        <input type="text" v-model.trim="todo" v-on:keyup.enter="addTodoList">
     </div>
-
     <script src="bundle.js"></script>
 </body>
 

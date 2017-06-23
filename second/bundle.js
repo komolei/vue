@@ -9803,7 +9803,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var app = new _vue2.default({
     el: '#komo',
     data: {
-        message: 'Hello World!'
+        message: 'Hello World!',
+        show: true,
+        name: name,
+        todo: "",
+        todoList: []
+
+    },
+    methods: {
+        sayName: function sayName() {
+            console.log(this.name);
+            if (this.show) {
+                this.show = !this.show;
+                console.log(this.show);
+            }
+        },
+        addTodoList: function addTodoList() {
+            this.todoList.push({
+                title: this.todo,
+                created: new Date()
+            });
+            this.todo = "";
+            console.log(this.todoList);
+        }
     }
 });
 
