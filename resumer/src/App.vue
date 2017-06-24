@@ -1,12 +1,12 @@
 <template>
   <!--<div id="app">
-                                            <img src="./assets/logo.png">
-                                              <router-view></router-view>
-                                            <TopBar/>
-                                            <ResumerEditor/>
-                                            <ResumerPreview/>
-                                            <p>{{ text}} </p>
-                                          </div>-->
+                                                                            <img src="./assets/logo.png">
+                                                                              <router-view></router-view>
+                                                                            <TopBar/>
+                                                                            <ResumerEditor/>
+                                                                            <ResumerPreview/>
+                                                                            <p>{{ text}} </p>
+                                                                          </div>-->
   <div class="page">
     <header>
       <TopBar/>
@@ -14,7 +14,9 @@
     <main>
       <ResumerEditor/>
       <ResumerPreview/>
+  
     </main>
+    <!--<p>{{show}}</p>-->
   </div>
 </template>
 
@@ -27,6 +29,7 @@ import TopBar from './components/TopBar.vue'
 import ResumerEditor from './components/ResumerEditor.vue'
 import ResumerPreview from './components/ResumerPreview.vue'
 import icons from './assets/icons'
+import store from './store/index.js'
 
 // export default {
 //   name: 'app',
@@ -37,19 +40,57 @@ import icons from './assets/icons'
 //   },
 export default {
   name: 'app',
-  data: function () {
-    return {
-      text: 'hello'
-    }
-  },
+  // data: function () {
+  //   return {
+  //     text: 'hello'
+  //   }
+  // },
+  store,
 
   // components: { TopBar, ResumerEditor, ResumerPreview },
   components: { TopBar, ResumerEditor, ResumerPreview },
+  // computed: {
+  //   show: function () {
+  //     return store.state.count
+  //   }
+  // },
+  beforeCreate() {
+    // console.log("i am being created");
+    // console.log(store.count);
+    console.log(store.state.count)
+  },
+
   created() {
     // document.body.insertAdjacentHTML('afterbegin', icons);
     document.body.insertAdjacentHTML('afterbegin', icons)
-  }
+  },
+
+  beforeMount() {
+    console.log(" I am being mounting");
+
+  },
+  mounted() {
+
+  },
+  beforeUpdate() {
+
+  },
+  updated() {
+
+  },
+  beforeDestroy() {
+
+  },
+  destroyed() {
+
+
+  },
+
+
+
+
 }
+
 </script>
 
 <style lang="scss">

@@ -1,14 +1,59 @@
 <template>
     <div id="ResumerPreview">
-        <p>{{text}}</p>
+        <!--<p> {{resume}}</p>-->
+        <section data-name="profile" v-show="resume.profile">
+            <h1>
+                {{resume.profile.name}}
+            </h1>
+            <h2>{{resume.profile.title}}</h2>
+            <p>
+                <small>{{resume.profile.city}}</small>
+                <small>{{resume.profile.birthday}}</small>
+            </p>
+        </section>
+        <section data-name="work" v-show="resume.work">
+            <h2>工作经历</h2>
+            <ol>
+                <li v-for="item in resume.work">
+                    <h3>{{item.company}}</h3>
+                    <p v-show="item.content"> {{item.content}} </p>
+                </li>
+            </ol>
+        </section>
+        <section data-name="education" v-show="resume.education">
+            <h2>教育经历</h2>
+            <ol>
+                <li v-for="item in resume.education">
+                    <h3>{{item.school}}</h3>
+                    <p v-show="item.content">{{item.content}}</p>
+                </li>
+            </ol>
+        </section>
+     
+    
     </div>
 </template>
 <script>
 export default {
     name: "ResumerPreview",
-    data: function () {
-        return {
-            text: "I am RESUMERPREVIEW"
+    // data: function () {
+    //     return {
+    //         text: "I am RESUMERPREVIEW"
+    //     }
+    // }
+    // data() {
+    //     return {
+    //         text: {
+    //             get() {
+    //                 return this.$store.state.selected;
+    //             }
+    //         }
+    //     }
+    // }
+    computed: {
+
+        resume() {
+            return this.$store.state.resume;
         }
     }
 }
