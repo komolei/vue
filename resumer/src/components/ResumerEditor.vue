@@ -5,7 +5,7 @@
             <ol>
                 <!--<li class="active"> x</li>
                                                 <li v-for="(item,index) in resume.visibleItems" :class="{active:item===selected}" @click="selected=item">{{index}}</li>-->
-                <li v-for="(item,index) in resume.config" :class="{active:item.field===selected}" @click="selected=item.field">
+                <li v-for="(item,index) in resume.config" :class="{active:item.field===selected}" @click="selected=item.field" :key="(item,index)">
                     <svg class="icon">
                         <use :xlink:href="`#icon-${item.icon}`"></use>
                     </svg>
@@ -13,12 +13,12 @@
             </ol>
         </nav>
         <ol class="panels">
-            <li v-for="item in resume.config" v-show="item.field===selected">
+            <li v-for="item in resume.config" v-show="item.field===selected" :key="item">
                 <!--<div class="resumeField" v-for="(value , key) in resume[item.field]">-->
                 <div v-if="resume[item.field] instanceof Array">
                     <!--<div class="subitem" v-for="subitem in resume[item.field]">-->
-                    <div class="subitem" v-for="(subitem,i) in resume[item.field]">
-                        <div class="resumeField" v-for="(value,key) in subitem">
+                    <div class="subitem" v-for="(subitem,i) in resume[item.field]" :key="(subitem,i)">
+                        <div class="resumeField" v-for="(value,key) in subitem" :key="(value,key)">
                             <label> {{ key }}</label>
                             <!--<input type="text" :value="value" v-model="subitem[key]">-->
                             <!--<input type="text" :value="value" @input="subitem[key]=$event.target.value">-->
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
+                <div v-else class="resumeField" v-for="(value,key) in resume[item.field]" :key="value,key">
                     <label> {{ key }}</label>
                     <!--<input type="text" v-model="resume[item.field][key]">-->
                     <!--error <input type="text" :value="value" @input="resume[item.field][key]=$event.target.value">-->
