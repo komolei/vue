@@ -15,10 +15,15 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import objectPath from 'object-path'
 
 Vue.use(Vuex)
 const state = {
     // count: 0,
+    user: {
+        id: '',
+        username: ''
+    },
     selected: 'profile',
     resume: {
         // visibleItems: ['profile', 'work history', 'education', 'projects', 'awards', 'contacts', 'others'],
@@ -79,11 +84,48 @@ export default new Vuex.Store({
     state,
     mutations: {
 
+        initState(state, payload) {
+            Object.assign(state, payload)
+        },
         switchTab(state, payload) {
             state.selected = payload;
-        }
+            localStorage.setItem('state', JSON.stringify(state))
+        },
+        // updateResume(state, {
+        //     field,
+        //     subfield,
+        //     value
+        // }) {
+        //     state.resume[field][subfield] = value;
+        // },
+        updateResume(state, {
+            path,
+            value
+        }) {
+            objectPath.set(state.resume, path, value)
+            localStorage.setItem('state', JSON.stringify(state))
+
+        },
+        setUser(state, payload) {
+            Object.assign(state.user, payload)
+            console.log(state.user)
+        },
         // switchTab(state, payload) {
         //     state.selected = payload, //错误,;打成逗号,
         // }
+        removeUser(state) {
+            state.user.id = "";
+        },
+        addResumeSubfield(state, { field }) {
+            let empty = {}
+            state.resume[field].push(empty)
+
+            state.resumeConfig.filter((i) => i.field === field)[0].keys.map((key) => {
+                Vue.set(empty, key, "")
+            })
+        },
+        delResumeField(state, { path }) {
+            objectPath.del(state.resume, path)
+        }
     }
 })

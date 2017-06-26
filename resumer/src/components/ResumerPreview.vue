@@ -110,7 +110,7 @@ export default {
     }
     p {
         white-space: pre-line;
-    } // 请问为什么要加这一行
+    } 
     section {
         >h2:first-child {
             background: #ddd;

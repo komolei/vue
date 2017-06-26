@@ -1,22 +1,15 @@
 <template>
-  <!--<div id="app">
-                                                                            <img src="./assets/logo.png">
-                                                                              <router-view></router-view>
-                                                                            <TopBar/>
-                                                                            <ResumerEditor/>
-                                                                            <ResumerPreview/>
-                                                                            <p>{{ text}} </p>
-                                                                          </div>-->
-  <div class="page">
-    <header>
-      <TopBar/>
-    </header>
-    <main>
-      <ResumerEditor/>
-      <ResumerPreview/>
+  <div>
+    <div class="page">
+      <header>
+        <TopBar/>
+      </header>
+      <main>
+        <ResumerEditor/>
+        <ResumerPreview/>
   
-    </main>
-    <!--<p>{{show}}</p>-->
+      </main>
+    </div>
   </div>
 </template>
 
@@ -28,9 +21,11 @@ import './assets/reset.css'
 import TopBar from './components/TopBar.vue'
 import ResumerEditor from './components/ResumerEditor.vue'
 import ResumerPreview from './components/ResumerPreview.vue'
+import MyDialog from './components/MyDialog.vue'
 import icons from './assets/icons'
 import store from './store/index.js'
-
+import AV from './lib/leancloud'
+import getAVUser from './lib/getAVUser'
 // export default {
 //   name: 'app',
 //   data: function () {
@@ -63,6 +58,12 @@ export default {
   created() {
     // document.body.insertAdjacentHTML('afterbegin', icons);
     document.body.insertAdjacentHTML('afterbegin', icons)
+    let state = localStorage.getItem('state')
+    if (state) {
+      state = JSON.parse(state)
+    }
+    this.$store.commit('initState', state)
+    this.$store.commit('setUser',getAVUser());
   },
 
   beforeMount() {
