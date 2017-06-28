@@ -1,9 +1,11 @@
-#基于Vue的在线Todo应用
+# 基于Vue的在线Todo应用
 
 
 为什么自己要做Todo? 因为初学框架Vue,正好通过这个小项目来进行巩固和总结。
 
-##Function
+[预览](https://komolei.github.io/vue/todo/page.html)
+
+## Function
 
 - 在线注册账号，数据存储于LearnCloud
 - TodoItem事项增删改，数据同步到云
