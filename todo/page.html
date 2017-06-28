@@ -26,9 +26,36 @@
         }
         
         .tab>label {
-            width: 2rem;
-            height: 3rem;
+            display: inline-block;
+            text-align: center;
+            width: 4rem;
+            height: 2rem;
             font-size: 1rem;
+            line-height: 2rem;
+            /*background: red;*/
+            cursor: pointer;
+            margin-left: 2rem;
+            padding-right: 1rem;
+            transition: all .5s;
+            border-bottom: 4px solid greenyellow;
+        }
+        
+        .tab>label:hover {
+            /*color: greenyellow;*/
+            border-bottom: 4px solid red;
+        }
+        
+        .tab>label>input {
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .tab>div {
+            width: 20rem;
+            height: 4px;
+            background: greenyellow;
+            margin-top: -4px;
+            margin-left: 6rem;
         }
         
         .signUp label,
@@ -118,7 +145,7 @@
             <div class="tab">
                 <label for="signUp"><input type="radio" id="signUp" value="signUp" v-model="actionType">注册</label>
                 <label for="login"><input type="radio" id="login" value="logIn" v-model="actionType"> 登入</label>
-                <!--<div>{{picked}}</div>-->
+                <div></div>
             </div>
             <div class="signUp" v-if="actionType=='signUp'">
                 <form @submit.prevent=signUp>
