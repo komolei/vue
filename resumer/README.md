@@ -56,9 +56,9 @@ npm test
 
 ###More
 
-[源代码](https://github.com/komolei/vue/tree/master/resumer/src)
-[个人网站](komolei.cn)
-[blog](http://www.jianshu.com/u/7a8b1d7efd89) ✏
+- [源代码](https://github.com/komolei/vue/tree/master/resumer/src) 
+- [个人网站](komolei.cn)
+- [blog](http://www.jianshu.com/u/7a8b1d7efd89) ✏
 
 【声明】：本项目仅供学习交流，请不要用做任何商业用途😊有任何疑问请联系作者📩 [Email](http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=naSpqaipqKyppN3s7LP_8vA) 
 
