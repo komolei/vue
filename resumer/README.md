@@ -54,7 +54,7 @@ npm run unit
 npm test
 ```
 
-###More
+## More
 
 - [源代码](https://github.com/komolei/vue/tree/master/resumer/src) 
 - [个人网站](komolei.cn)
