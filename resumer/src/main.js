@@ -13,3 +13,6 @@ new Vue({
     template: '<App/>',
     components: { App }
 })
+Vue.component('komo',{
+    template:'<p>I am komo</p>'
+})
